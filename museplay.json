@@ -1,7 +1,7 @@
 {
-  "created_date": "2025-12-30 03:08:02",
+  "created_date": "2025-12-30 03:09:52",
   "basedir": "midi/",
-  "file_count": 9,
+  "file_count": 10,
   "files": [
     {
       "filename": "3-love affair-ennio morricone.midi",
@@ -48,6 +48,14 @@
       "file_size": 1335,
       "title": "Remember me",
       "artist": "Coco",
+      "difficulty": "초급",
+      "youtube": ""
+    },
+    {
+      "filename": "2-Romance-Yuhki_Kuramoto.mscz.midi",
+      "file_size": 7408,
+      "title": "Romance",
+      "artist": "Yuhki Kuramoto",
       "difficulty": "초급",
       "youtube": ""
     },
