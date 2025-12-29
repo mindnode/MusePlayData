@@ -27,6 +27,7 @@ SUCCESS_COUNT=0
 FAIL_COUNT=0
 PROCESSED_FILES=()
 FAILED_FILES=()
+BASE_NAME=""
 
 # ============================================================================
 # 로깅 함수
@@ -319,6 +320,7 @@ create_json() {
     # JSON 시작 (메타데이터 포함)
     local json_data="{"
     json_data+="\n  \"created_date\": \"${creation_date}\","
+    json_data+="\n  \"base\": \"${BASE_NAME}\","
     json_data+="\n  \"file_count\": ${file_count},"
     json_data+="\n  \"files\": ["
     
@@ -430,7 +432,21 @@ main() {
         exit 1
     fi
     
-    log_success "new 디렉토리 확인 완료: ${MIDI_DIR}"
+    # new 폴더 이름 변경 (날짜 시간 형식: YYYYMMDD-HHMMSS)
+    local timestamp=$(date +"%Y%m%d-%H%M%S")
+    local renamed_folder="${SCRIPT_DIR}/${timestamp}"
+    
+    log_info "new 폴더 이름 변경 중: ${MIDI_DIR} → ${renamed_folder}"
+    mv "$MIDI_DIR" "$renamed_folder"
+    log_success "폴더 이름 변경 완료: ${renamed_folder}"
+    
+    # BASE_NAME 설정 (폴더 이름만, 경로 제외)
+    BASE_NAME="$timestamp"
+    
+    # MIDI_DIR을 변경된 폴더 경로로 업데이트
+    MIDI_DIR="$renamed_folder"
+    
+    log_success "작업 대상 디렉토리: ${MIDI_DIR}"
     
     # MIDI 파일 스캔
     log_info "MIDI 파일 스캔 중..."
@@ -503,6 +519,11 @@ main() {
     
     # 리포트 생성
     generate_report
+    
+    # 새로운 new 폴더 생성
+    local new_folder="${SCRIPT_DIR}/new"
+    mkdir -p "$new_folder"
+    log_success "새로운 new 폴더 생성 완료: ${new_folder}"
     
     log_success "모든 작업이 완료되었습니다!"
 }
