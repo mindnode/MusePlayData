@@ -295,12 +295,7 @@ check_duplicates() {
             local filename=$(basename "$dup")
             log_warn "  - ${filename}"
         done
-        echo ""
-        read -p "계속 진행하시겠습니까? (y/n): " REPLY
-        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-            log_info "사용자가 취소했습니다."
-            exit 0
-        fi
+        log_info "중복 파일은 자동으로 스킵하고 계속 진행합니다."
     fi
 }
 
@@ -310,7 +305,23 @@ check_duplicates() {
 create_json() {
     log_info "JSON 파일 생성 중..."
     
-    local json_data="["
+    # 파일 생성 날짜와 시간
+    local creation_date=$(date +"%Y-%m-%d %H:%M:%S")
+    
+    # 처리된 파일 수 계산
+    local file_count=0
+    for filepath in "${PROCESSED_FILES[@]}"; do
+        if parse_filename "$filepath"; then
+            file_count=$((file_count + 1))
+        fi
+    done
+    
+    # JSON 시작 (메타데이터 포함)
+    local json_data="{"
+    json_data+="\n  \"created_date\": \"${creation_date}\","
+    json_data+="\n  \"file_count\": ${file_count},"
+    json_data+="\n  \"files\": ["
+    
     local first=true
     
     # 곡 제목 순으로 정렬하기 위해 임시 파일 사용
@@ -349,18 +360,19 @@ create_json() {
             local escaped_artist=$(json_escape "$PARSED_ARTIST")
             local escaped_difficulty=$(json_escape "$PARSED_DIFFICULTY")
             
-            json_data+="\n  {"
-            json_data+="\n    \"filename\": \"${escaped_filename}\","
-            json_data+="\n    \"file_size\": ${FILE_SIZE},"
-            json_data+="\n    \"created_date\": \"${FILE_DATE}\","
-            json_data+="\n    \"title\": \"${escaped_title}\","
-            json_data+="\n    \"artist\": \"${escaped_artist}\","
-            json_data+="\n    \"difficulty\": \"${escaped_difficulty}\""
-            json_data+="\n  }"
+            json_data+="\n    {"
+            json_data+="\n      \"filename\": \"${escaped_filename}\","
+            json_data+="\n      \"file_size\": ${FILE_SIZE},"
+            json_data+="\n      \"created_date\": \"${FILE_DATE}\","
+            json_data+="\n      \"title\": \"${escaped_title}\","
+            json_data+="\n      \"artist\": \"${escaped_artist}\","
+            json_data+="\n      \"difficulty\": \"${escaped_difficulty}\""
+            json_data+="\n    }"
         fi
     done
     
-    json_data+="\n]"
+    json_data+="\n  ]"
+    json_data+="\n}"
     
     # JSON 파일 저장
     echo -e "$json_data" > "${OUTPUT_FILE}"
@@ -440,11 +452,7 @@ main() {
     
     # 사용자 확인
     echo ""
-    read -p "위 파일들을 처리하여 JSON 파일을 생성하시겠습니까? (y/n): " REPLY
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        log_info "사용자가 취소했습니다."
-        exit 0
-    fi
+
     
     # 기존 JSON 파일 확인
     if [ -f "$OUTPUT_FILE" ]; then
