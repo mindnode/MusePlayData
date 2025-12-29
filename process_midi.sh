@@ -19,8 +19,9 @@ NC='\033[0m' # No Color
 # 전역 변수
 # ============================================================================
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-MIDI_DIR="${SCRIPT_DIR}/new"
-OUTPUT_FILE="${SCRIPT_DIR}/museplay_new.json"
+NEW_DIR="${SCRIPT_DIR}/new"
+MIDI_DIR="${SCRIPT_DIR}/midi"
+OUTPUT_FILE="${SCRIPT_DIR}/museplay.json"
 LOG_FILE="${SCRIPT_DIR}/history.log"
 
 SUCCESS_COUNT=0
@@ -79,8 +80,8 @@ normalize_text() {
     local text="$1"
     # _ → 공백
     text="${text//_/ }"
-    # 특수기호를 공백으로 변환 (알파벳, 숫자, 한글은 유지)
-    text=$(echo "$text" | sed 's/[^a-zA-Z0-9가-힣 ]/ /g')
+    # 특수기호를 공백으로 변환 (알파벳, 숫자, 한글, 작은따옴표는 유지)
+    text=$(echo "$text" | sed "s/[^a-zA-Z0-9가-힣 ']/ /g")
     # 연속 공백 → 단일 공백
     text=$(echo "$text" | sed 's/  */ /g')
     # 앞뒤 공백 제거
@@ -320,27 +321,26 @@ create_json() {
     # JSON 시작 (메타데이터 포함)
     local json_data="{"
     json_data+="\n  \"created_date\": \"${creation_date}\","
-    json_data+="\n  \"base\": \"${BASE_NAME}\","
     json_data+="\n  \"file_count\": ${file_count},"
     json_data+="\n  \"files\": ["
     
     local first=true
     
-    # 곡 제목 순으로 정렬하기 위해 임시 파일 사용
+    # 파일 수정일 기준 최신순으로 정렬하기 위해 임시 파일 사용
     local temp_sort_file=$(mktemp)
     
     for filepath in "${PROCESSED_FILES[@]}"; do
-        if parse_filename "$filepath"; then
-            # 정렬 키: 곡 제목|아티스트명|파일경로
-            echo "${PARSED_TITLE}|${PARSED_ARTIST}|${filepath}" >> "$temp_sort_file"
-        fi
+        # 파일 수정일 (Unix 타임스탬프)
+        local mod_time=$(stat -f%m "$filepath" 2>/dev/null || echo "0")
+        # 정렬 키: 수정일(내림차순)|파일경로
+        echo "${mod_time}|${filepath}" >> "$temp_sort_file"
     done
     
-    # 정렬 (곡 제목 기준)
+    # 정렬 (수정일 기준 내림차순 - 최신순)
     local -a sorted_files
-    while IFS='|' read -r title artist filepath; do
+    while IFS='|' read -r mod_time filepath; do
         sorted_files+=("$filepath")
-    done < <(sort "$temp_sort_file")
+    done < <(sort -t'|' -k1,1rn "$temp_sort_file")
     
     rm -f "$temp_sort_file"
     
@@ -365,10 +365,10 @@ create_json() {
             json_data+="\n    {"
             json_data+="\n      \"filename\": \"${escaped_filename}\","
             json_data+="\n      \"file_size\": ${FILE_SIZE},"
-            json_data+="\n      \"created_date\": \"${FILE_DATE}\","
             json_data+="\n      \"title\": \"${escaped_title}\","
             json_data+="\n      \"artist\": \"${escaped_artist}\","
-            json_data+="\n      \"difficulty\": \"${escaped_difficulty}\""
+            json_data+="\n      \"difficulty\": \"${escaped_difficulty}\","
+            json_data+="\n      \"youtube\": \"\""
             json_data+="\n    }"
         fi
     done
@@ -426,30 +426,51 @@ main() {
     log_info "로그 파일: ${LOG_FILE}"
     echo ""
     
-    # new 디렉토리 확인
+    # new와 midi 디렉토리 확인
+    if [ ! -d "$NEW_DIR" ]; then
+        log_warn "new 디렉토리를 찾을 수 없습니다: ${NEW_DIR}"
+    fi
+    
     if [ ! -d "$MIDI_DIR" ]; then
-        log_error "new 디렉토리를 찾을 수 없습니다: ${MIDI_DIR}"
+        log_warn "midi 디렉토리를 찾을 수 없습니다: ${MIDI_DIR}"
+    fi
+    
+    if [ ! -d "$NEW_DIR" ] && [ ! -d "$MIDI_DIR" ]; then
+        log_error "new와 midi 디렉토리가 모두 없습니다."
         exit 1
     fi
     
-    # new 폴더 이름 변경 (날짜 시간 형식: YYYYMMDD-HHMMSS)
-    local timestamp=$(date +"%Y%m%d-%H%M%S")
-    local renamed_folder="${SCRIPT_DIR}/${timestamp}"
+    # new 폴더의 MIDI 파일을 midi 디렉토리로 이동
+    if [ -d "$NEW_DIR" ]; then
+        log_info "new 폴더의 MIDI 파일을 midi 디렉토리로 이동 중..."
+        
+        # midi 디렉토리가 없으면 생성
+        if [ ! -d "$MIDI_DIR" ]; then
+            mkdir -p "$MIDI_DIR"
+            log_success "midi 디렉토리 생성 완료: ${MIDI_DIR}"
+        fi
+        
+        # new 폴더의 MIDI 파일 찾기
+        local new_files=()
+        while IFS= read -r -d '' file; do
+            new_files+=("$file")
+        done < <(find "$NEW_DIR" -maxdepth 1 -type f \( -name "*.mid" -o -name "*.midi" \) -print0 2>/dev/null)
+        
+        if [ ${#new_files[@]} -gt 0 ]; then
+            for filepath in "${new_files[@]}"; do
+                local filename=$(basename "$filepath")
+                local dest_path="${MIDI_DIR}/${filename}"
+                mv "$filepath" "$dest_path"
+                log_success "파일 이동: ${filename}"
+            done
+            log_success "${#new_files[@]}개의 파일을 midi 디렉토리로 이동 완료"
+        else
+            log_info "new 폴더에 MIDI 파일이 없습니다."
+        fi
+    fi
     
-    log_info "new 폴더 이름 변경 중: ${MIDI_DIR} → ${renamed_folder}"
-    mv "$MIDI_DIR" "$renamed_folder"
-    log_success "폴더 이름 변경 완료: ${renamed_folder}"
-    
-    # BASE_NAME 설정 (폴더 이름만, 경로 제외)
-    BASE_NAME="$timestamp"
-    
-    # MIDI_DIR을 변경된 폴더 경로로 업데이트
-    MIDI_DIR="$renamed_folder"
-    
-    log_success "작업 대상 디렉토리: ${MIDI_DIR}"
-    
-    # MIDI 파일 스캔
-    log_info "MIDI 파일 스캔 중..."
+    # midi 디렉토리의 MIDI 파일 스캔
+    log_info "midi 디렉토리에서 MIDI 파일 스캔 중..."
     local midi_files=()
     
     while IFS= read -r -d '' file; do
