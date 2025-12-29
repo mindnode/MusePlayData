@@ -321,6 +321,7 @@ create_json() {
     # JSON 시작 (메타데이터 포함)
     local json_data="{"
     json_data+="\n  \"created_date\": \"${creation_date}\","
+    json_data+="\n  \"basedir\": \"midi/\","
     json_data+="\n  \"file_count\": ${file_count},"
     json_data+="\n  \"files\": ["
     
