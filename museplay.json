@@ -1,7 +1,7 @@
 {
-  "created_date": "2025-12-30 03:09:52",
+  "created_date": "2025-12-30 03:11:28",
   "basedir": "midi/",
-  "file_count": 10,
+  "file_count": 11,
   "files": [
     {
       "filename": "3-love affair-ennio morricone.midi",
@@ -65,6 +65,14 @@
       "title": "Bam Yang Gang",
       "artist": "BIBI",
       "difficulty": "중급",
+      "youtube": ""
+    },
+    {
+      "filename": "2-The_1st_Melody^of_the_Night-Shi Jin.mscz.midi",
+      "file_size": 2577,
+      "title": "The 1st Melody of the Night",
+      "artist": "Shi Jin",
+      "difficulty": "초급",
       "youtube": ""
     },
     {
