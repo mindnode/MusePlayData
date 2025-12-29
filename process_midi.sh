@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # MIDI 파일 스캔 및 JSON 변환 스크립트
-# 실행 위치 하위의 midi 디렉토리에서 MIDI 파일을 스캔하여 JSON으로 변환
+# 실행 위치 하위의 new 디렉토리에서 MIDI 파일을 스캔하여 JSON으로 변환
 
 set -e  # 오류 발생 시 즉시 중단
 
@@ -19,8 +19,8 @@ NC='\033[0m' # No Color
 # 전역 변수
 # ============================================================================
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-MIDI_DIR="${SCRIPT_DIR}/midi"
-OUTPUT_FILE="${SCRIPT_DIR}/museplay_presets.json"
+MIDI_DIR="${SCRIPT_DIR}/new"
+OUTPUT_FILE="${SCRIPT_DIR}/museplay_new.json"
 LOG_FILE="${SCRIPT_DIR}/history.log"
 
 SUCCESS_COUNT=0
@@ -424,13 +424,13 @@ main() {
     log_info "로그 파일: ${LOG_FILE}"
     echo ""
     
-    # midi 디렉토리 확인
+    # new 디렉토리 확인
     if [ ! -d "$MIDI_DIR" ]; then
-        log_error "midi 디렉토리를 찾을 수 없습니다: ${MIDI_DIR}"
+        log_error "new 디렉토리를 찾을 수 없습니다: ${MIDI_DIR}"
         exit 1
     fi
     
-    log_success "midi 디렉토리 확인 완료: ${MIDI_DIR}"
+    log_success "new 디렉토리 확인 완료: ${MIDI_DIR}"
     
     # MIDI 파일 스캔
     log_info "MIDI 파일 스캔 중..."
