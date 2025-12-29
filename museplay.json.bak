@@ -1,6 +1,7 @@
 {
-  "created_date": "2025-12-30 02:02:32",
-  "file_count": 7,
+  "created_date": "2025-12-30 03:11:28",
+  "basedir": "midi/",
+  "file_count": 11,
   "files": [
     {
       "filename": "3-love affair-ennio morricone.midi",
@@ -27,6 +28,14 @@
       "youtube": ""
     },
     {
+      "filename": "2-My_Soul-July.mscz.midi",
+      "file_size": 4863,
+      "title": "My Soul",
+      "artist": "July",
+      "difficulty": "초급",
+      "youtube": ""
+    },
+    {
       "filename": "3-Schindler's list^theme-Movie OST.mscz.midi",
       "file_size": 2255,
       "title": "Schindler's list theme",
@@ -35,11 +44,35 @@
       "youtube": ""
     },
     {
+      "filename": "2-Remember me-Coco.mscz.midi",
+      "file_size": 1335,
+      "title": "Remember me",
+      "artist": "Coco",
+      "difficulty": "초급",
+      "youtube": ""
+    },
+    {
+      "filename": "2-Romance-Yuhki_Kuramoto.mscz.midi",
+      "file_size": 7408,
+      "title": "Romance",
+      "artist": "Yuhki Kuramoto",
+      "difficulty": "초급",
+      "youtube": ""
+    },
+    {
       "filename": "3-Bam_Yang_Gang-BIBI.mscz.midi",
       "file_size": 9102,
       "title": "Bam Yang Gang",
       "artist": "BIBI",
       "difficulty": "중급",
+      "youtube": ""
+    },
+    {
+      "filename": "2-The_1st_Melody^of_the_Night-Shi Jin.mscz.midi",
+      "file_size": 2577,
+      "title": "The 1st Melody of the Night",
+      "artist": "Shi Jin",
+      "difficulty": "초급",
       "youtube": ""
     },
     {

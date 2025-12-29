@@ -384,6 +384,106 @@ create_json() {
 }
 
 # ============================================================================
+# GitHub 푸시 함수
+# ============================================================================
+push_to_github() {
+    log_info "GitHub에 푸시 중..."
+    
+    # git 저장소인지 확인
+    if [ ! -d "${SCRIPT_DIR}/.git" ]; then
+        log_warn "Git 저장소가 아닙니다. 푸시를 건너뜁니다."
+        return 0
+    fi
+    
+    # git 명령어가 있는지 확인
+    if ! command -v git &> /dev/null; then
+        log_warn "git 명령어를 찾을 수 없습니다. 푸시를 건너뜁니다."
+        return 0
+    fi
+    
+    # 현재 디렉토리로 이동
+    cd "$SCRIPT_DIR"
+    
+    # 원격 저장소 URL 설정
+    local remote_url="https://github.com/mindnode/MusePlayData"
+    local remote_name="origin"
+    
+    # 원격 저장소 확인 및 설정
+    if ! git remote get-url "$remote_name" > /dev/null 2>&1; then
+        # origin이 없으면 추가
+        git remote add "$remote_name" "$remote_url"
+        log_info "원격 저장소 추가: ${remote_url}"
+    else
+        # origin이 있으면 URL 확인 및 업데이트
+        local current_url=$(git remote get-url "$remote_name" 2>/dev/null)
+        if [ "$current_url" != "$remote_url" ]; then
+            git remote set-url "$remote_name" "$remote_url"
+            log_info "원격 저장소 URL 업데이트: ${remote_url}"
+        fi
+    fi
+    
+    # JSON 파일이 존재하는지 확인
+    if [ ! -f "${OUTPUT_FILE}" ]; then
+        log_warn "JSON 파일이 없습니다. 푸시를 건너뜁니다."
+        return 0
+    fi
+    
+    # JSON 파일과 midi 디렉토리 추가
+    git add "${OUTPUT_FILE}"
+    log_success "파일 스테이징: ${OUTPUT_FILE}"
+    
+    # midi 디렉토리가 존재하면 추가
+    if [ -d "${MIDI_DIR}" ]; then
+        git add "${MIDI_DIR}/"
+        log_success "디렉토리 스테이징: ${MIDI_DIR}/"
+    fi
+    
+    # 스테이징된 변경사항 확인 (변경사항이 없으면 0 반환)
+    if git diff --cached --quiet --exit-code 2>/dev/null; then
+        log_info "변경사항이 없어 푸시를 건너뜁니다."
+        git reset HEAD "${OUTPUT_FILE}" > /dev/null 2>&1
+        if [ -d "${MIDI_DIR}" ]; then
+            git reset HEAD "${MIDI_DIR}/" > /dev/null 2>&1
+        fi
+        return 0
+    fi
+    
+    # 변경사항이 있음
+    
+    # 커밋 메시지 생성
+    local commit_date=$(date +"%Y-%m-%d %H:%M:%S")
+    local commit_message="Update museplay.json and midi files - ${commit_date}"
+    
+        # 커밋
+        if git commit -m "$commit_message" > /dev/null 2>&1; then
+            log_success "커밋 완료: ${commit_message}"
+            
+            # 현재 브랜치 확인
+            local current_branch=$(git branch --show-current 2>/dev/null)
+            if [ -z "$current_branch" ]; then
+                # 브랜치 이름을 가져올 수 없으면 기본값 사용
+                current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
+            fi
+            
+            # 현재 브랜치로 푸시
+            log_info "브랜치 ${current_branch}로 푸시 시도 중..."
+            local push_output=$(git push origin "$current_branch" 2>&1)
+            local push_exit_code=$?
+            
+            if [ $push_exit_code -eq 0 ]; then
+                log_success "GitHub ${current_branch} 브랜치에 푸시 완료 (${remote_url})"
+            else
+                log_error "GitHub 푸시 실패"
+                log_error "에러 메시지: ${push_output}"
+                return 1
+            fi
+        else
+            log_warn "커밋 실패"
+            return 1
+        fi
+}
+
+# ============================================================================
 # 리포트 생성 함수
 # ============================================================================
 generate_report() {
@@ -541,6 +641,9 @@ main() {
     
     # 리포트 생성
     generate_report
+    
+    # GitHub에 푸시
+    push_to_github
     
     # 새로운 new 폴더 생성
     local new_folder="${SCRIPT_DIR}/new"
