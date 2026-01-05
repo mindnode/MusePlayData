@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MusePlay - Remember the Flow, Make the Story. Real-time MIDI music performance app">
+    <title>MusePlay - Remember the Flow, Make the Story</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --bg-dark: #0f172a;
+            --bg-darker: #020617;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-darker);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.1) 0%, var(--bg-darker) 70%);
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .description {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.125rem;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Highlights Section */
+        .highlights {
+            padding: 6rem 2rem;
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .highlights-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .highlight-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .highlight-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-label {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        /* Tech Stack Section */
+        .tech-stack {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .tech-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 4rem 2rem 2rem;
+            background: var(--bg-dark);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-tagline {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-copyright {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.25rem;
+            }
+
+            .description {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 0.875rem 2rem;
+                font-size: 1rem;
+            }
+
+            .features-grid,
+            .highlights-grid,
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content fade-in-up">
+            <h1 class="logo">MusePlay</h1>
+            <p class="tagline">Remember the Flow, Make the Story</p>
+            <p class="description">
+                Real-time MIDI music performance app. Experience immersive music with beautiful visual effects.
+                Powered by a high-performance audio engine and sophisticated visualization system built with SwiftUI and SpriteKit.
+            </p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Download on App Store</a>
+                <a href="#features" class="btn btn-secondary">Explore Features</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2 class="section-title scroll-reveal">Key Features</h2>
+        <p class="section-subtitle scroll-reveal">
+            Immersive music experience powered by a powerful audio engine and beautiful visual effects
+        </p>
+
+        <div class="features-grid">
+            <div class="feature-card scroll-reveal">
+                <span class="feature-icon">🎵</span>
+                <h3 class="feature-title">Real-time MIDI Playback</h3>
+                <p class="feature-description">
+                    High-performance audio engine based on AudioKit for real-time MIDI file playback.
+                    Features SoundFont support, multi-channel sampler, and sophisticated timing group-based playback system.
+                </p>
+            </div>
+
+            <div class="feature-card scroll-reveal">
+                <span class="feature-icon">🎨</span>
+                <h3 class="feature-title">Beautiful Visual Effects</h3>
+                <p class="feature-description">
+                    Experience music visually with various effects including waterfall effects, particle systems, 
+                    trail effects, and hit effects. Powered by SpriteKit's high-performance rendering system.
+                </p>
+            </div>
+
+            <div class="feature-card scroll-reveal">
+                <span class="feature-icon">🎹</span>
+                <h3 class="feature-title">Touch Performance</h3>
+                <p class="feature-description">
+                    Multi-touch support enables chord playing. Features velocity mapping based on touch intensity 
+                    and precise haptic feedback powered by CoreHaptics.
+                </p>
+            </div>
+
+            <div class="feature-card scroll-reveal">
+                <span class="feature-icon">⚙️</span>
+                <h3 class="feature-title">Rich Customization</h3>
+                <p class="feature-description">
+                    Detailed settings across 8 categories. Customize audio effects, visual effects, note display, 
+                    touch controls, performance optimization, and more to your preference.
+                </p>
+            </div>
+
+            <div class="feature-card scroll-reveal">
+                <span class="feature-icon">🌍</span>
+                <h3 class="feature-title">Multi-language Support</h3>
+                <p class="feature-description">
+                    Supports 8 languages including Korean, English, Chinese, Japanese, German, French, 
+                    Portuguese, and Hindi. Features automatic language detection.
+                </p>
+            </div>
+
+            <div class="feature-card scroll-reveal">
+                <span class="feature-icon">⚡</span>
+                <h3 class="feature-title">Extreme Performance Optimization</h3>
+                <p class="feature-description">
+                    Delivers smooth performance experience through extreme optimization including particle pooling, 
+                    texture caching, dynamic performance adjustment, and thermal management.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="highlights">
+        <div class="highlights-content">
+            <h2 class="section-title scroll-reveal">App Highlights</h2>
+            <div class="highlights-grid">
+                <div class="highlight-item scroll-reveal">
+                    <div class="highlight-number">8</div>
+                    <div class="highlight-label">Supported Languages</div>
+                </div>
+                <div class="highlight-item scroll-reveal">
+                    <div class="highlight-number">8</div>
+                    <div class="highlight-label">Setting Categories</div>
+                </div>
+                <div class="highlight-item scroll-reveal">
+                    <div class="highlight-number">16</div>
+                    <div class="highlight-label">MIDI Channels</div>
+                </div>
+                <div class="highlight-item scroll-reveal">
+                    <div class="highlight-number">∞</div>
+                    <div class="highlight-label">Customizable</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="tech-stack">
+        <h2 class="section-title scroll-reveal">Tech Stack</h2>
+        <p class="section-subtitle scroll-reveal">
+            Built with cutting-edge Apple technologies and open-source frameworks
+        </p>
+
+        <div class="tech-grid">
+            <div class="tech-item scroll-reveal">
+                <div class="tech-name">SwiftUI</div>
+            </div>
+            <div class="tech-item scroll-reveal">
+                <div class="tech-name">SpriteKit</div>
+            </div>
+            <div class="tech-item scroll-reveal">
+                <div class="tech-name">AudioKit</div>
+            </div>
+            <div class="tech-item scroll-reveal">
+                <div class="tech-name">CoreHaptics</div>
+            </div>
+            <div class="tech-item scroll-reveal">
+                <div class="tech-name">CoreMotion</div>
+            </div>
+            <div class="tech-item scroll-reveal">
+                <div class="tech-name">CoreImage</div>
+            </div>
+            <div class="tech-item scroll-reveal">
+                <div class="tech-name">Firebase</div>
+            </div>
+            <div class="tech-item scroll-reveal">
+                <div class="tech-name">CoreData</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-tagline">Remember the Flow, Make the Story.</p>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="#" class="footer-link">Contact</a>
+            </div>
+            <p class="footer-copyright">
+                © 2025 MuseSphere. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
