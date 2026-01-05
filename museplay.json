@@ -1,90 +1,58 @@
 {
-  "created_date": "2025-12-31 17:26:52",
+  "created_date": "2026-01-05 23:42:05",
   "basedir": "midi/",
-  "file_count": 42,
+  "file_count": 8,
   "files": [
     {
-      "filename": "2-The_Sound^of_Silence-Simon_and_Garfunkel.mscz.midi",
-      "file_size": 9545,
-      "title": "The Sound of Silence",
-      "artist": "Simon and Garfunkel",
+      "filename": "2-Duet-Omori Game OST.mid",
+      "file_size": 2240,
+      "title": "Duet",
+      "artist": "Omori Game OST",
       "difficulty": "초급",
       "youtube": ""
     },
     {
-      "filename": "2-Love_Theme(Short)-Cinema_Paradiso.mid",
-      "file_size": 939,
-      "title": "Love Theme Short",
-      "artist": "Cinema Paradiso",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Love_Theme-Cinema_Paradiso.mid",
-      "file_size": 5058,
-      "title": "Love Theme",
-      "artist": "Cinema Paradiso",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Like_a_Wind-S.E.N.S.mid",
-      "file_size": 4919,
-      "title": "Like a Wind",
-      "artist": "S E N S",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "3-love affair-ennio morricone.midi",
-      "file_size": 3977,
-      "title": "love affair",
-      "artist": "ennio morricone",
-      "difficulty": "중급",
-      "youtube": ""
-    },
-    {
-      "filename": "3-Old Doll-Mad Father.mscz.midi",
-      "file_size": 4760,
-      "title": "Old Doll",
-      "artist": "Mad Father",
-      "difficulty": "중급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-When the Love Falls-Yiruma.mscz.midi",
-      "file_size": 5491,
-      "title": "When the Love Falls",
-      "artist": "Yiruma",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-My_Soul-July.mscz.midi",
-      "file_size": 4863,
+      "filename": "2-My_Soul-July.mid",
+      "file_size": 4228,
       "title": "My Soul",
       "artist": "July",
       "difficulty": "초급",
       "youtube": ""
     },
     {
-      "filename": "3-Schindler's list^theme-Movie OST.mscz.midi",
-      "file_size": 2255,
-      "title": "Schindler's list theme",
-      "artist": "Movie OST",
+      "filename": "3-Romance-Yuhki_Kuramoto.midi",
+      "file_size": 7408,
+      "title": "Romance",
+      "artist": "Yuhki Kuramoto",
       "difficulty": "중급",
       "youtube": ""
     },
     {
-      "filename": "2-G_Minor-Johann_Sebastian_Bach.mscz.midi",
-      "file_size": 6568,
-      "title": "G Minor",
-      "artist": "Johann Sebastian Bach",
+      "filename": "2-Old Doll-Mad Father.midi",
+      "file_size": 4760,
+      "title": "Old Doll",
+      "artist": "Mad Father",
       "difficulty": "초급",
       "youtube": ""
     },
     {
-      "filename": "2-Remember me-Coco.mscz.midi",
+      "filename": "4-When the Love Falls-Yiruma.midi",
+      "file_size": 5491,
+      "title": "When the Love Falls",
+      "artist": "Yiruma",
+      "difficulty": "고급",
+      "youtube": ""
+    },
+    {
+      "filename": "3-Graceful_Ghost-W.Bolcom.midi",
+      "file_size": 5026,
+      "title": "Graceful Ghost",
+      "artist": "W Bolcom",
+      "difficulty": "중급",
+      "youtube": ""
+    },
+    {
+      "filename": "2-Remember me-Coco.midi",
       "file_size": 1335,
       "title": "Remember me",
       "artist": "Coco",
@@ -92,251 +60,11 @@
       "youtube": ""
     },
     {
-      "filename": "2-Can't help^falling in love-Elvis Presley.mscz.midi",
-      "file_size": 3549,
-      "title": "Can't help falling in love",
-      "artist": "Elvis Presley",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Waltz_b._150_in_a_minor-Frédéric Chopin.mscz.midi",
-      "file_size": 5640,
-      "title": "Waltz b 150 in a minor",
-      "artist": "Fre de ric Chopin",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Gymnopdie_no._1-Erik Satie.mscz.midi",
-      "file_size": 3156,
-      "title": "Gymnopdie no 1",
-      "artist": "Erik Satie",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Spring Time^musesphere(v.3)-Yiruma.mscz.midi",
-      "file_size": 5618,
-      "title": "Spring Time musesphere v 3",
-      "artist": "Yiruma",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "3-Autumn Leaves-Joseph Kosma.mscz.midi",
-      "file_size": 3762,
-      "title": "Autumn Leaves",
-      "artist": "Joseph Kosma",
-      "difficulty": "중급",
-      "youtube": ""
-    },
-    {
-      "filename": "3-Autumn Leaves^easy-Joseph Kosma.mscz.midi",
-      "file_size": 1823,
-      "title": "Autumn Leaves easy",
-      "artist": "Joseph Kosma",
-      "difficulty": "중급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Romance-Yuhki_Kuramoto.mscz.midi",
-      "file_size": 7408,
-      "title": "Romance",
-      "artist": "Yuhki Kuramoto",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Just want to look at you^super easy version-Hisaishi Joe.mscz.midi",
-      "file_size": 1157,
-      "title": "Just want to look at you super easy version",
-      "artist": "Hisaishi Joe",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Just want to look at you^easy version-Hisaishi Joe.mscz.midi",
-      "file_size": 1319,
-      "title": "Just want to look at you easy version",
-      "artist": "Hisaishi Joe",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Crimson_Waltz-Yukiko Isomura.mscz.midi",
-      "file_size": 15023,
-      "title": "Crimson Waltz",
-      "artist": "Yukiko Isomura",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "3-Chaconne^60 bpm-Yiruma.mscz.midi",
-      "file_size": 7364,
-      "title": "Chaconne 60 bpm",
-      "artist": "Yiruma",
-      "difficulty": "중급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Don't_Forget-Deltarune Ending Theme.mscz.midi",
-      "file_size": 1044,
-      "title": "Don't Forget",
-      "artist": "Deltarune Ending Theme",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Fairytale_Theme-Shrek Soundtrack.mscz.midi",
-      "file_size": 2652,
-      "title": "Fairytale Theme",
-      "artist": "Shrek Soundtrack",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-The Deer Hunter-Cavatina.mscz.midi",
-      "file_size": 4845,
-      "title": "The Deer Hunter",
-      "artist": "Cavatina",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Love_In_The_Dark-Adele.mscz.midi",
-      "file_size": 8600,
-      "title": "Love In The Dark",
-      "artist": "Adele",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Valse_Sentimentale_No.2-Eric_Christian_von_Fricken.mscz.midi",
-      "file_size": 6531,
-      "title": "Valse Sentimentale No 2",
-      "artist": "Eric Christian von Fricken",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Flowers-Miley_Cyrus.mscz.midi",
-      "file_size": 3406,
-      "title": "Flowers",
-      "artist": "Miley Cyrus",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Perhaps_Love-John Denver, Placido Domingo.mscz.midi",
-      "file_size": 7785,
-      "title": "Perhaps Love",
-      "artist": "John Denver Placido Domingo",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Twilight-Kotaro_Oshio.mscz.midi",
-      "file_size": 7985,
-      "title": "Twilight",
-      "artist": "Kotaro Oshio",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Say_You^Say_Me-Lionel Richie.mscz.midi",
-      "file_size": 14289,
-      "title": "Say You Say Me",
-      "artist": "Lionel Richie",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "5-Piano Challenge^No.5 Full-Tony Ann.mscz.midi",
-      "file_size": 4951,
-      "title": "Piano Challenge No 5 Full",
-      "artist": "Tony Ann",
+      "filename": "5-A Cruel Angels Thesis-Neon Genesis Evangelion.midi",
+      "file_size": 18293,
+      "title": "A Cruel Angels Thesis",
+      "artist": "Neon Genesis Evangelion",
       "difficulty": "최상",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Goodnight^Story-Magnus_Ludvigsson.mscz.midi",
-      "file_size": 5082,
-      "title": "Goodnight Story",
-      "artist": "Magnus Ludvigsson",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "3-13_Jours^En_France-Francis_Lai.mscz.midi",
-      "file_size": 8848,
-      "title": "13 Jours En France",
-      "artist": "Francis Lai",
-      "difficulty": "중급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-The_1st_Melody^of_the_Night-Shi Jin.mscz.midi",
-      "file_size": 2577,
-      "title": "The 1st Melody of the Night",
-      "artist": "Shi Jin",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Shape_of^My_Heart-Sting.mscz.midi",
-      "file_size": 5220,
-      "title": "Shape of My Heart",
-      "artist": "Sting",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Feelings-Morris_Albert.mscz.midi",
-      "file_size": 5743,
-      "title": "Feelings",
-      "artist": "Morris Albert",
-      "difficulty": "초급",
-      "youtube": ""
-    },
-    {
-      "filename": "3-An_old_story_from_grandma-Mabinogi_Theme_Song.mscz.midi",
-      "file_size": 9254,
-      "title": "An old story from grandma",
-      "artist": "Mabinogi Theme Song",
-      "difficulty": "중급",
-      "youtube": ""
-    },
-    {
-      "filename": "3-Bridge_Over_Troubled_Water-Simon Garfunkel.mscz.midi",
-      "file_size": 13559,
-      "title": "Bridge Over Troubled Water",
-      "artist": "Simon Garfunkel",
-      "difficulty": "중급",
-      "youtube": ""
-    },
-    {
-      "filename": "3-Love_Story-Epik_High.mscz.midi",
-      "file_size": 2592,
-      "title": "Love Story",
-      "artist": "Epik High",
-      "difficulty": "중급",
-      "youtube": ""
-    },
-    {
-      "filename": "3-Angel-Sarah_McLachlan.mscz.midi",
-      "file_size": 5825,
-      "title": "Angel",
-      "artist": "Sarah McLachlan",
-      "difficulty": "중급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Despacito-Luis Fonsi Ft. Daddy Yankee.mscz.midi",
-      "file_size": 10108,
-      "title": "Despacito",
-      "artist": "Luis Fonsi Ft Daddy Yankee",
-      "difficulty": "초급",
       "youtube": ""
     }
   ]
