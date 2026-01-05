@@ -1,7 +1,7 @@
 {
-  "created_date": "2026-01-06 00:02:21",
+  "created_date": "2026-01-06 00:03:32",
   "basedir": "midi/",
-  "file_count": 8,
+  "file_count": 9,
   "files": [
     {
       "filename": "2-Duet-Omori Game OST.mid",
@@ -57,6 +57,14 @@
       "title": "Remember me",
       "artist": "Coco",
       "difficulty": "초급",
+      "youtube": ""
+    },
+    {
+      "filename": "5-Engravings-Ethan_Bortnick.midi",
+      "file_size": 3455,
+      "title": "Engravings",
+      "artist": "Ethan Bortnick",
+      "difficulty": "최상",
       "youtube": ""
     },
     {
