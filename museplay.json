@@ -1,7 +1,7 @@
 {
-  "created_date": "2026-01-06 00:31:30",
+  "created_date": "2026-01-06 01:05:35",
   "basedir": "midi/",
-  "file_count": 10,
+  "file_count": 9,
   "files": [
     {
       "filename": "2-Duet-Omori Game OST.mid",
@@ -25,14 +25,6 @@
       "title": "Romance",
       "artist": "Yuhki Kuramoto",
       "difficulty": "중급",
-      "youtube": ""
-    },
-    {
-      "filename": "2-Old Doll-Mad Father.midi",
-      "file_size": 4760,
-      "title": "Old Doll",
-      "artist": "Mad Father",
-      "difficulty": "초급",
       "youtube": ""
     },
     {
